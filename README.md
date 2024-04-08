@@ -23,8 +23,14 @@ OpenWeather API
 
 ## Screenshot
 
+![WeatherApp](https://github.com/JMcKenna01/Weather-Dashboard-App/assets/147211404/796fdeb0-904c-4b3b-99ec-04a927df95d1)
 
-[CLICK-HERE]()
+
+
+![weatherapp2](https://github.com/JMcKenna01/Weather-Dashboard-App/assets/147211404/36781d91-ed4c-4912-9e96-610ff5522f8a)
+
+
+
 
 ## Link to the Deployed Application
 
