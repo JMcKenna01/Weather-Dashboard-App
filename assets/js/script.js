@@ -4,9 +4,9 @@ const apiKey = 'febfb2aa061328db35073ec1c10c0665';
 // Elements
 const searchForm = document.getElementById('searchForm');
 const cityInput = document.getElementById('searchInput');
-const currentWeatherData = document.getElementById('currentWeather'); // Ensure this matches your HTML
-const forecastContainer = document.getElementById('forecastContainer'); // Ensure this matches your HTML
-const historyList = document.getElementById('savedList'); // Ensure this matches your HTML
+const currentWeatherData = document.getElementById('currentWeather');
+const forecastContainer = document.getElementById('forecastContainer');
+const historyList = document.getElementById('savedList');
 
 // Fetch weather data for a city
 function fetchWeatherForCity(city) {
@@ -37,21 +37,17 @@ function displayCurrentWeather(data) {
     const current = data.list[0];
     const weatherDescription = current.weather[0].description;
     const iconUrl = `https://openweathermap.org/img/wn/${current.weather[0].icon}.png`;
+    const now = new Date();
+    const options = { weekday: 'long', hour: '2-digit', minute: '2-digit' };
 
-    // Clear previous data
-    currentWeatherData.innerHTML = '';
-
-    // Append new current weather data
     currentWeatherData.innerHTML = `
+        <h2>Today in ${data.city.name} (${now.toLocaleDateString("en-US", options)})</h2>
         <div class="card bg-secondary mb-3">
             <div class="card-body">
-                <h5 class="card-title dateDisplay mb-3">${new Date(current.dt * 1000).toLocaleDateString()}</h5>
-                <p class="humidityDisplay">Humidity: ${current.main.humidity}%</p>
-                <p class="windDisplay">Wind: ${current.wind.speed} MPH</p>
-                <div id="tempCard" class="d-flex align-items-center">
-                    <img class="iconDisplay" src="${iconUrl}" alt="Weather condition icon">
-                    <p class="tempDisplay">${current.main.temp}°F</p>
-                </div>
+                <img src="${iconUrl}" alt="${weatherDescription}" class="float-start me-3">
+                <p>Temp: ${current.main.temp}°F</p>
+                <p>Wind: ${current.wind.speed} MPH</p>
+                <p>Humidity: ${current.main.humidity}%</p>
             </div>
         </div>
     `;
@@ -63,7 +59,6 @@ function displayCurrentWeather(data) {
 function displayForecast(forecastData) {
     forecastContainer.innerHTML = ''; // Clear previous forecast
 
-    // Filter out the forecast data for midday for each day
     forecastData.filter((_, index) => index % 8 === 0).forEach(forecast => {
         const date = new Date(forecast.dt * 1000);
         const iconUrl = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`;
@@ -71,11 +66,11 @@ function displayForecast(forecastData) {
         forecastContainer.innerHTML += `
             <div class="card bg-dark text-light m-2 col-12 col-md-5 col-lg border border-2 border-info">
                 <div class="card-body">
-                    <h5 class="dateDisplay">${date.toLocaleDateString()}</h5>
-                    <img class="iconDisplay" src="${iconUrl}" alt="Weather condition icon">
-                    <p class="tempDisplay">Temp: ${forecast.main.temp}°F</p>
-                    <p class="humidityDisplay">Humidity: ${forecast.main.humidity}%</p>
-                    <p class="windDisplay">Wind: ${forecast.wind.speed} MPH</p>
+                    <h5>${date.toLocaleDateString()}</h5>
+                    <img src="${iconUrl}" alt="${forecast.weather[0].description}">
+                    <p>Temp: ${forecast.main.temp}°F</p>
+                    <p>Humidity: ${forecast.main.humidity}%</p>
+                    <p>Wind: ${forecast.wind.speed} MPH</p>
                 </div>
             </div>
         `;
@@ -88,7 +83,7 @@ function displayForecast(forecastData) {
 function saveToHistory(city) {
     let cities = JSON.parse(localStorage.getItem('searchHistory')) || [];
     if (!cities.includes(city)) {
-        cities.unshift(city); // Add new city to the front of the array
+        cities.unshift(city);
         localStorage.setItem('searchHistory', JSON.stringify(cities));
         renderHistoryList(cities);
     }
@@ -96,11 +91,11 @@ function saveToHistory(city) {
 
 // Render the search history list
 function renderHistoryList(cities) {
-    historyList.innerHTML = ''; // Clear previous history
+    historyList.innerHTML = '';
 
     cities.forEach(city => {
         const listItem = document.createElement('li');
-        listItem.classList.add('list-group-item', 'bg-dark', 'text-light'); // Bootstrap classes
+        listItem.classList.add('list-group-item', 'bg-dark', 'text-light');
         listItem.textContent = city;
         listItem.addEventListener('click', () => fetchWeatherForCity(city));
         historyList.appendChild(listItem);

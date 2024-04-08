@@ -1,0 +1,141 @@
+/* General Styles */
+body, html {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff !important; /* Ensuring white background for both body and html */
+    color: #343a40; /* Dark text color for better contrast */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2c3e50 !important; /* Dark blue header */
+    color: white !important;
+    padding: 20px 0;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+section, aside {
+    background-color: #ffffff !important; /* White background for sections and aside */
+    color: #343a40; /* Dark text for readability */
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Search Section Styles */
+#search-section {
+    width: 20%;
+    min-width: 200px;
+    padding: 20px;
+}
+
+#search-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa !important; /* Slightly gray background for the input field */
+}
+
+/* Override Bootstrap Button Color with More Specificity */
+.btn, .btn-warning, #search-form button, #searchForm button {
+    background-color: #007bff !important; /* Blue button, ensures override */
+    color: #ffffff !important; /* White text */
+    border-color: #007bff !important;
+}
+
+.btn:hover, .btn-warning:hover, #search-form button:hover, #searchForm button:hover {
+    background-color: #0056b3 !important; /* Darker blue on hover */
+    border-color: #004085 !important;
+}
+
+/* Search History Styles */
+#search-history {
+    background-color: #ffffff !important; /* White background */
+    width: 20%;
+    min-width: 200px;
+    padding: 20px;
+}
+
+#search-history ul {
+    list-style: none;
+    padding: 0;
+}
+
+#search-history li {
+    background-color: #f8f9fa !important; /* Light gray for list items */
+    color: #343a40 !important; /* Dark text for readability */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#search-history li:hover {
+    background-color: #e9ecef !important; /* Slightly darker gray on hover */
+}
+
+/* Current Weather and Forecast Styles */
+#current-weather, #forecast {
+    width: 55%;
+    min-width: 300px;
+    padding: 20px;
+}
+
+#current-weather h2, #forecast h2 {
+    background-color: #3498db !important; /* Blue title backgrounds */
+    color: white !important;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#current-weather-data, #forecast-container {
+    margin-top: 20px;
+}
+
+#forecast-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.forecast-day {
+    background-color: #f8f9fa !important; /* Light gray for forecast items */
+    color: #343a40 !important; /* Dark text for readability */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #2c3e50 !important; /* Dark blue footer */
+    color: white !important;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+@media (max-width: 768px) {
+    /* Responsive Design Adjustments */
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #search-section, #search-history, #current-weather, #forecast {
+        width: 90%;
+        max-width: 500px;
+    }
+}
